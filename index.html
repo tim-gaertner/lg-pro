@@ -21,35 +21,40 @@ html,body{height:100%;overflow:hidden;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
   display:flex;flex-direction:column;height:100dvh;max-width:480px;margin:0 auto;}
 
-/* Header */
+/* ── Header ── */
 .hdr{background:var(--accent);color:#fff;display:flex;align-items:center;
-  padding:calc(var(--st) + 13px) 18px 13px;gap:10px;flex-shrink:0;}
+  padding:calc(var(--st) + 13px) 18px 0;gap:10px;flex-shrink:0;flex-direction:column;}
+.hdr-top{display:flex;align-items:center;width:100%;gap:10px;padding-bottom:14px;}
 .hdr-icon{font-size:20px;line-height:1;}
 .hdr-title{font-size:17px;font-weight:600;letter-spacing:-.2px;}
 .hdr-sub{font-size:10px;opacity:.45;margin-left:auto;letter-spacing:.5px;text-transform:uppercase;}
 
-/* Tab bar */
-.tabbar{display:flex;background:var(--surface);border-top:1px solid var(--border);
-  flex-shrink:0;padding-bottom:var(--sb);}
-.ti{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;padding:10px 4px 8px;cursor:pointer;color:var(--text3);min-height:54px;
-  user-select:none;-webkit-user-select:none;transition:color .15s;}
-.ti.active{color:var(--accent);}
-.ti svg{width:22px;height:22px;flex-shrink:0;}
-.ti span{font-size:10px;font-weight:500;letter-spacing:.2px;}
+/* ── Prominent tabs — live inside the header ── */
+.tabs{display:flex;width:100%;gap:4px;padding:0 0 0;}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:11px 8px;cursor:pointer;border-radius:10px 10px 0 0;
+  font-size:14px;font-weight:500;color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);border-bottom:none;
+  transition:background .15s,color .15s;
+  user-select:none;-webkit-user-select:none;touch-action:manipulation;}
+.tab svg{width:18px;height:18px;flex-shrink:0;}
+.tab.active{background:var(--bg);color:var(--accent);font-weight:600;}
+.tab:not(.active):active{background:rgba(255,255,255,.15);}
 
-/* Main */
-.main{flex:1;overflow:hidden;min-height:0;}
+/* ── Main ── */
+.main{flex:1;overflow:hidden;min-height:0;background:var(--bg);}
 .panel{display:none;height:100%;flex-direction:column;overflow:hidden;}
 .panel.active{display:flex;}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding:14px 14px 32px;}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;padding:16px 14px 40px;}
 
-/* Section label */
+/* ── Section label ── */
 .sl{font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
   color:var(--text3);margin:20px 0 8px;}
 .sl:first-child{margin-top:4px;}
 
-/* Card */
+/* ── Card ── */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;
   padding:16px;margin-bottom:10px;}
 .card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px;
@@ -57,7 +62,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
 .tag{font-size:10px;font-weight:500;background:var(--accent-bg);color:var(--accent-text);
   padding:2px 7px;border-radius:4px;letter-spacing:.3px;}
 
-/* Form rows - everything stays inside the card */
+/* ── Form rows ── */
 .row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .row label{font-size:13px;color:var(--text2);width:82px;flex-shrink:0;}
 .row input[type=number],.row select,.row .fi-wrap{flex:1;min-width:0;}
@@ -66,34 +71,28 @@ input[type=number],select{
   -webkit-appearance:none;appearance:none;
   background:var(--surface2);border:1px solid var(--border);
   border-radius:10px;color:var(--text);outline:none;
-  transition:border-color .15s,background .15s;
-  width:100%;
+  transition:border-color .15s,background .15s;width:100%;
 }
 input[type=number]:focus,select:focus{border-color:var(--accent2);background:var(--surface);}
 .row input[type=number]{height:46px;padding:0 12px;font-family:'DM Mono',monospace;font-size:16px;}
 .row select{height:46px;padding:0 10px;font-size:14px;}
 
-/* Feet+inches dual input */
+/* ── Feet + inches ── */
 .fi-wrap{display:flex;gap:6px;align-items:center;min-width:0;}
 .fi-wrap input[type=number]{flex:1;min-width:0;height:46px;padding:0 10px;
   font-family:'DM Mono',monospace;font-size:15px;}
 .fi-unit{font-size:12px;color:var(--text3);flex-shrink:0;width:16px;}
 
-/* Inline small select (unit chooser) */
-.usel{height:46px;padding:0 8px;font-size:13px;width:68px;flex-shrink:0;
-  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
-  color:var(--text);-webkit-appearance:none;appearance:none;outline:none;}
-.usel:focus{border-color:var(--accent2);background:var(--surface);}
-
-/* Calc button */
+/* ── Calc button ── */
 .btn{width:100%;height:50px;background:var(--accent);color:#fff;border:none;
   border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;margin-top:4px;letter-spacing:.2px;transition:background .12s;}
+  cursor:pointer;margin-top:4px;letter-spacing:.2px;transition:background .12s;
+  touch-action:manipulation;}
 .btn:active{background:var(--accent2);}
 
-/* Result */
-.res{background:var(--accent);color:#fff;border-radius:10px;padding:14px 16px;
-  margin-top:10px;display:none;}
+/* ── Result ── */
+.res{background:var(--accent);color:#fff;border-radius:10px;
+  padding:14px 16px;margin-top:10px;display:none;}
 .res.show{display:block;}
 .rl{font-size:10px;opacity:.5;letter-spacing:.9px;text-transform:uppercase;margin-bottom:4px;}
 .rv{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;}
@@ -101,57 +100,7 @@ input[type=number]:focus,select:focus{border-color:var(--accent2);background:var
 .err{color:var(--danger);font-size:12px;margin-top:6px;display:none;}
 .err.show{display:block;}
 
-/* ═══════ TAPE CALCULATOR ═══════ */
-#tab-calc{background:var(--bg);}
-.tape-bar{display:flex;align-items:center;justify-content:space-between;
-  padding:8px 16px 4px;flex-shrink:0;}
-.tape-lbl{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;font-weight:600;}
-.tape-clr{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;
-  padding:6px 10px;border-radius:8px;font-family:'DM Sans',sans-serif;}
-.tape-clr:active{background:var(--surface3);}
-
-.tape-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  overscroll-behavior-y:contain;padding:4px 16px 8px;min-height:0;}
-.tape-empty{height:100%;display:flex;align-items:center;justify-content:center;
-  color:var(--text3);font-size:13px;}
-.t-entry{display:flex;align-items:baseline;justify-content:flex-end;gap:8px;
-  padding:5px 0;border-bottom:1px solid transparent;}
-.t-expr{font-family:'DM Mono',monospace;font-size:13px;color:var(--text3);
-  text-align:right;flex:1;line-height:1.4;}
-.t-eq{font-size:12px;color:var(--text3);}
-.t-val{font-family:'DM Mono',monospace;font-size:19px;font-weight:500;
-  color:var(--text);min-width:100px;text-align:right;}
-.tape-sep{height:1px;background:var(--border);margin:8px 0 4px;}
-.t-total{display:flex;align-items:baseline;justify-content:flex-end;padding:4px 0 12px;gap:10px;}
-.t-total-lbl{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.5px;}
-.t-total-val{font-family:'DM Mono',monospace;font-size:30px;font-weight:600;color:var(--accent);}
-
-/* Display */
-.tape-disp{background:var(--surface);border-top:1px solid var(--border);
-  padding:10px 16px;flex-shrink:0;display:flex;align-items:center;
-  justify-content:flex-end;min-height:64px;}
-.td{font-family:'DM Mono',monospace;font-size:34px;font-weight:400;
-  color:var(--text);text-align:right;letter-spacing:-.5px;word-break:break-all;line-height:1.1;}
-.td.muted{font-size:20px;color:var(--text2);}
-
-/* Keypad */
-.kpad{background:var(--surface2);border-top:1px solid var(--border);flex-shrink:0;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
-  padding:8px 10px calc(8px + var(--sb));}
-.k{height:66px;border:1px solid var(--border);border-radius:12px;background:var(--surface);
-  color:var(--text);font-family:'DM Mono',monospace;font-size:22px;font-weight:400;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  user-select:none;-webkit-user-select:none;touch-action:manipulation;
-  transition:opacity .08s,transform .08s;}
-.k:active{transform:scale(.92);opacity:.7;}
-.k.op{color:var(--accent);font-weight:600;font-size:24px;}
-.k.fn{background:var(--surface3);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;}
-.k.eq{background:var(--accent);color:#fff;border-color:transparent;font-size:28px;}
-.k.eq:active{background:var(--accent2);}
-.k.wide{grid-column:span 2;}
-.k.red{color:var(--danger);}
-
-/* ═══════ CONVERTER ═══════ */
+/* ── Converter ── */
 .csel-row{display:grid;grid-template-columns:1fr 38px 1fr;align-items:center;gap:6px;margin-bottom:10px;}
 .csel-row select{height:42px;padding:0 10px;font-size:13px;width:100%;}
 .swp{background:var(--surface2);border:1px solid var(--border);border-radius:10px;
@@ -174,57 +123,31 @@ input[type=number]:focus,select:focus{border-color:var(--accent2);background:var
 <body>
 
 <div class="hdr">
-  <div class="hdr-icon">📐</div>
-  <div class="hdr-title">LG Pro</div>
-  <div class="hdr-sub">Construction Manager</div>
+  <div class="hdr-top">
+    <div class="hdr-icon">📐</div>
+    <div class="hdr-title">LG Pro</div>
+    <div class="hdr-sub">Construction Manager</div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" id="tab-btn-conv" onclick="switchTab('conv',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+      </svg>
+      Convert
+    </div>
+    <div class="tab" id="tab-btn-con" onclick="switchTab('con',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/>
+      </svg>
+      Construction
+    </div>
+  </div>
 </div>
 
 <div class="main">
 
-<!-- ═══════════════ TAPE CALCULATOR ═══════════════ -->
-<div class="panel active" id="tab-calc">
-  <div class="tape-bar">
-    <span class="tape-lbl">Tape</span>
-    <button class="tape-clr" onclick="clrTape()">Clear tape</button>
-  </div>
-
-  <div class="tape-scroll" id="tscroll">
-    <div class="tape-empty" id="tempty">Start typing to add entries</div>
-  </div>
-
-  <div class="tape-disp">
-    <div class="td" id="tdisp">0</div>
-  </div>
-
-  <div class="kpad">
-    <button class="k fn red" onclick="kFn('ac')">AC</button>
-    <button class="k fn"     onclick="kFn('del')">⌫</button>
-    <button class="k fn"     onclick="kFn('pct')">%</button>
-    <button class="k op"     onclick="kOp('/')">÷</button>
-
-    <button class="k" onclick="kNum('7')">7</button>
-    <button class="k" onclick="kNum('8')">8</button>
-    <button class="k" onclick="kNum('9')">9</button>
-    <button class="k op" onclick="kOp('*')">×</button>
-
-    <button class="k" onclick="kNum('4')">4</button>
-    <button class="k" onclick="kNum('5')">5</button>
-    <button class="k" onclick="kNum('6')">6</button>
-    <button class="k op" onclick="kOp('-')">−</button>
-
-    <button class="k" onclick="kNum('1')">1</button>
-    <button class="k" onclick="kNum('2')">2</button>
-    <button class="k" onclick="kNum('3')">3</button>
-    <button class="k op" onclick="kOp('+')">+</button>
-
-    <button class="k wide" onclick="kNum('0')">0</button>
-    <button class="k"      onclick="kFn('dot')">.</button>
-    <button class="k eq"   onclick="kEq()">=</button>
-  </div>
-</div>
-
 <!-- ═══════════════ CONVERTER ═══════════════ -->
-<div class="panel" id="tab-conv">
+<div class="panel active" id="tab-conv">
   <div class="scroll">
 
     <div class="sl">Length</div>
@@ -305,27 +228,24 @@ input[type=number]:focus,select:focus{border-color:var(--accent2);background:var
 <div class="panel" id="tab-con">
   <div class="scroll">
 
-    <!-- ROOF PITCH -->
     <div class="sl">Roofing</div>
     <div class="card">
       <div class="card-title">Roof pitch <span class="tag">rise / run · rafter length</span></div>
-      <!-- Rise: feet + inches -->
       <div class="row">
         <label>Rise</label>
         <div class="fi-wrap">
-          <input type="number" id="pr-ft" placeholder="0" inputmode="decimal" step="any" oninput="cPitch()">
+          <input type="number" id="pr-ft" placeholder="0" inputmode="decimal" step="any">
           <span class="fi-unit">ft</span>
-          <input type="number" id="pr-in" placeholder="6" inputmode="decimal" step="any" oninput="cPitch()">
+          <input type="number" id="pr-in" placeholder="6" inputmode="decimal" step="any">
           <span class="fi-unit">in</span>
         </div>
       </div>
-      <!-- Run: feet + inches -->
       <div class="row">
         <label>Run</label>
         <div class="fi-wrap">
-          <input type="number" id="pn-ft" placeholder="0" inputmode="decimal" step="any" oninput="cPitch()">
+          <input type="number" id="pn-ft" placeholder="0" inputmode="decimal" step="any">
           <span class="fi-unit">ft</span>
-          <input type="number" id="pn-in" placeholder="12" inputmode="decimal" step="any" oninput="cPitch()">
+          <input type="number" id="pn-in" placeholder="12" inputmode="decimal" step="any">
           <span class="fi-unit">in</span>
         </div>
       </div>
@@ -334,7 +254,6 @@ input[type=number]:focus,select:focus{border-color:var(--accent2);background:var
       <div class="err" id="e-pitch">Enter a valid rise and run.</div>
     </div>
 
-    <!-- AREA -->
     <div class="sl">Area</div>
     <div class="card">
       <div class="card-title">Area calculator <span class="tag">rect · circle · triangle</span></div>
@@ -346,185 +265,60 @@ input[type=number]:focus,select:focus{border-color:var(--accent2);background:var
           <option value="tri">Triangle</option>
         </select>
       </div>
-      <!-- Rectangle -->
       <div id="sf-rect">
-        <div class="row">
-          <label>Length</label>
-          <div class="fi-wrap">
-            <input type="number" id="al-ft" placeholder="20" inputmode="decimal" step="any">
-            <span class="fi-unit">ft</span>
-            <input type="number" id="al-in" placeholder="0" inputmode="decimal" step="any">
-            <span class="fi-unit">in</span>
-          </div>
-        </div>
-        <div class="row">
-          <label>Width</label>
-          <div class="fi-wrap">
-            <input type="number" id="aw-ft" placeholder="15" inputmode="decimal" step="any">
-            <span class="fi-unit">ft</span>
-            <input type="number" id="aw-in" placeholder="0" inputmode="decimal" step="any">
-            <span class="fi-unit">in</span>
-          </div>
-        </div>
+        <div class="row"><label>Length</label><div class="fi-wrap"><input type="number" id="al-ft" placeholder="20" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="al-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
+        <div class="row"><label>Width</label><div class="fi-wrap"><input type="number" id="aw-ft" placeholder="15" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="aw-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
       </div>
-      <!-- Circle -->
       <div id="sf-circ" style="display:none">
-        <div class="row">
-          <label>Radius</label>
-          <div class="fi-wrap">
-            <input type="number" id="ar-ft" placeholder="10" inputmode="decimal" step="any">
-            <span class="fi-unit">ft</span>
-            <input type="number" id="ar-in" placeholder="0" inputmode="decimal" step="any">
-            <span class="fi-unit">in</span>
-          </div>
-        </div>
+        <div class="row"><label>Radius</label><div class="fi-wrap"><input type="number" id="ar-ft" placeholder="10" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="ar-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
       </div>
-      <!-- Triangle -->
       <div id="sf-tri" style="display:none">
-        <div class="row">
-          <label>Base</label>
-          <div class="fi-wrap">
-            <input type="number" id="ab-ft" placeholder="20" inputmode="decimal" step="any">
-            <span class="fi-unit">ft</span>
-            <input type="number" id="ab-in" placeholder="0" inputmode="decimal" step="any">
-            <span class="fi-unit">in</span>
-          </div>
-        </div>
-        <div class="row">
-          <label>Height</label>
-          <div class="fi-wrap">
-            <input type="number" id="ah-ft" placeholder="10" inputmode="decimal" step="any">
-            <span class="fi-unit">ft</span>
-            <input type="number" id="ah-in" placeholder="0" inputmode="decimal" step="any">
-            <span class="fi-unit">in</span>
-          </div>
-        </div>
+        <div class="row"><label>Base</label><div class="fi-wrap"><input type="number" id="ab-ft" placeholder="20" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="ab-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
+        <div class="row"><label>Height</label><div class="fi-wrap"><input type="number" id="ah-ft" placeholder="10" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="ah-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
       </div>
       <button class="btn" onclick="cAreaCalc()">Calculate area</button>
       <div class="res" id="r-area"><div class="rl">Area</div><div class="rv" id="rv-area"></div><div class="rs" id="rs-area"></div></div>
       <div class="err" id="e-area">Enter valid dimensions.</div>
     </div>
 
-    <!-- CONCRETE -->
     <div class="sl">Concrete</div>
     <div class="card">
       <div class="card-title">Concrete volume <span class="tag">slabs · footings · pads</span></div>
-      <div class="row">
-        <label>Length</label>
-        <div class="fi-wrap">
-          <input type="number" id="cnl-ft" placeholder="20" inputmode="decimal" step="any">
-          <span class="fi-unit">ft</span>
-          <input type="number" id="cnl-in" placeholder="0" inputmode="decimal" step="any">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Width</label>
-        <div class="fi-wrap">
-          <input type="number" id="cnw-ft" placeholder="10" inputmode="decimal" step="any">
-          <span class="fi-unit">ft</span>
-          <input type="number" id="cnw-in" placeholder="0" inputmode="decimal" step="any">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
-      <!-- Thickness stays in inches only — that's how contractors think about slab depth -->
-      <div class="row">
-        <label>Thickness</label>
-        <div class="fi-wrap">
-          <input type="number" id="cnt" placeholder="4" inputmode="decimal" step="any" style="flex:2">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
+      <div class="row"><label>Length</label><div class="fi-wrap"><input type="number" id="cnl-ft" placeholder="20" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="cnl-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
+      <div class="row"><label>Width</label><div class="fi-wrap"><input type="number" id="cnw-ft" placeholder="10" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="cnw-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
+      <div class="row"><label>Thickness</label><div class="fi-wrap"><input type="number" id="cnt" placeholder="4" inputmode="decimal" step="any" style="flex:2"><span class="fi-unit">in</span></div></div>
       <button class="btn" onclick="cConcrete()">Calculate volume</button>
       <div class="res" id="r-con"><div class="rl">Concrete needed</div><div class="rv" id="rv-con"></div><div class="rs" id="rs-con"></div></div>
       <div class="err" id="e-con">Enter valid dimensions.</div>
     </div>
 
-    <!-- STAIRS -->
     <div class="sl">Stairs</div>
     <div class="card">
       <div class="card-title">Stair calculator <span class="tag">risers · run · IBC code</span></div>
-      <!-- Total rise in feet + inches — common for floor-to-floor height -->
-      <div class="row">
-        <label>Total rise</label>
-        <div class="fi-wrap">
-          <input type="number" id="str-ft" placeholder="9" inputmode="decimal" step="any">
-          <span class="fi-unit">ft</span>
-          <input type="number" id="str-in" placeholder="0" inputmode="decimal" step="any">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Tread depth</label>
-        <div class="fi-wrap">
-          <input type="number" id="stt" placeholder="11" value="11" inputmode="decimal" step="any" style="flex:2">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
+      <div class="row"><label>Total rise</label><div class="fi-wrap"><input type="number" id="str-ft" placeholder="9" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="str-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
+      <div class="row"><label>Tread depth</label><div class="fi-wrap"><input type="number" id="stt" placeholder="11" value="11" inputmode="decimal" step="any" style="flex:2"><span class="fi-unit">in</span></div></div>
       <button class="btn" onclick="cStair()">Calculate stairs</button>
       <div class="res" id="r-stair"><div class="rl">Stair results</div><div class="rv" id="rv-stair"></div><div class="rs" id="rs-stair"></div></div>
       <div class="err" id="e-stair">Enter a valid total rise.</div>
     </div>
 
-    <!-- DIAGONAL / LAYOUT -->
     <div class="sl">Layout</div>
     <div class="card">
       <div class="card-title">Diagonal check <span class="tag">3-4-5 · squaring layout</span></div>
-      <div class="row">
-        <label>Side A</label>
-        <div class="fi-wrap">
-          <input type="number" id="dga-ft" placeholder="30" inputmode="decimal" step="any">
-          <span class="fi-unit">ft</span>
-          <input type="number" id="dga-in" placeholder="0" inputmode="decimal" step="any">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Side B</label>
-        <div class="fi-wrap">
-          <input type="number" id="dgb-ft" placeholder="40" inputmode="decimal" step="any">
-          <span class="fi-unit">ft</span>
-          <input type="number" id="dgb-in" placeholder="0" inputmode="decimal" step="any">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
+      <div class="row"><label>Side A</label><div class="fi-wrap"><input type="number" id="dga-ft" placeholder="30" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="dga-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
+      <div class="row"><label>Side B</label><div class="fi-wrap"><input type="number" id="dgb-ft" placeholder="40" inputmode="decimal" step="any"><span class="fi-unit">ft</span><input type="number" id="dgb-in" placeholder="0" inputmode="decimal" step="any"><span class="fi-unit">in</span></div></div>
       <button class="btn" onclick="cDiag()">Calculate diagonal</button>
       <div class="res" id="r-diag"><div class="rl">Diagonal (hypotenuse)</div><div class="rv" id="rv-diag"></div><div class="rs" id="rs-diag"></div></div>
       <div class="err" id="e-diag">Enter valid side lengths.</div>
     </div>
 
-    <!-- BOARD FEET -->
     <div class="sl">Lumber</div>
     <div class="card">
       <div class="card-title">Board feet <span class="tag">lumber takeoff</span></div>
-      <div class="row">
-        <label>Thickness</label>
-        <div class="fi-wrap">
-          <input type="number" id="bf-t" placeholder="2" inputmode="decimal" step="any" style="flex:2">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Width</label>
-        <div class="fi-wrap">
-          <input type="number" id="bf-w" placeholder="6" inputmode="decimal" step="any" style="flex:2">
-          <span class="fi-unit">in</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Length</label>
-        <div class="fi-wrap">
-          <input type="number" id="bf-l" placeholder="8" inputmode="decimal" step="any" style="flex:2">
-          <span class="fi-unit">ft</span>
-        </div>
-      </div>
-      <div class="row">
-        <label>Qty</label>
-        <div class="fi-wrap">
-          <input type="number" id="bf-q" placeholder="1" value="1" inputmode="numeric" step="1" style="flex:2">
-          <span class="fi-unit">pcs</span>
-        </div>
-      </div>
+      <div class="row"><label>Thickness</label><div class="fi-wrap"><input type="number" id="bf-t" placeholder="2" inputmode="decimal" step="any" style="flex:2"><span class="fi-unit">in</span></div></div>
+      <div class="row"><label>Width</label><div class="fi-wrap"><input type="number" id="bf-w" placeholder="6" inputmode="decimal" step="any" style="flex:2"><span class="fi-unit">in</span></div></div>
+      <div class="row"><label>Length</label><div class="fi-wrap"><input type="number" id="bf-l" placeholder="8" inputmode="decimal" step="any" style="flex:2"><span class="fi-unit">ft</span></div></div>
+      <div class="row"><label>Qty</label><div class="fi-wrap"><input type="number" id="bf-q" placeholder="1" value="1" inputmode="numeric" step="1" style="flex:2"><span class="fi-unit">pcs</span></div></div>
       <button class="btn" onclick="cBoardFt()">Calculate board feet</button>
       <div class="res" id="r-bf"><div class="rl">Board feet</div><div class="rv" id="rv-bf"></div><div class="rs" id="rs-bf"></div></div>
       <div class="err" id="e-bf">Enter valid dimensions.</div>
@@ -535,184 +329,13 @@ input[type=number]:focus,select:focus{border-color:var(--accent2);background:var
 
 </div><!-- /main -->
 
-<!-- Tab bar -->
-<div class="tabbar">
-  <div class="ti active" id="ti-calc" onclick="switchTab('calc',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="4" y="3" width="16" height="18" rx="2"/>
-      <line x1="8" y1="8" x2="16" y2="8"/>
-      <line x1="8" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="16" y2="12"/>
-      <line x1="8" y1="16" x2="10" y2="16"/><line x1="14" y1="16" x2="16" y2="16"/>
-    </svg>
-    <span>Calculator</span>
-  </div>
-  <div class="ti" id="ti-conv" onclick="switchTab('conv',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
-    </svg>
-    <span>Convert</span>
-  </div>
-  <div class="ti" id="ti-con" onclick="switchTab('con',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/>
-    </svg>
-    <span>Construction</span>
-  </div>
-</div>
-
 <script>
-// ══ Tab switching ══
+// ── Tab switching ──
 function switchTab(n,el){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.ti').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('tab-'+n).classList.add('active');
   el.classList.add('active');
-}
-
-// ══════════════════════════════════════
-// TAPE CALCULATOR
-// Numerical-style: each = press commits
-// the current expression to the tape.
-// Pressing an operator after = chains.
-// ══════════════════════════════════════
-var cur='0', prevVal=null, pendingOp=null, justEvaled=false, hasInput=false, entries=[];
-
-function fN(n,d){
-  d = d===undefined ? 6 : d;
-  var v=parseFloat(n);
-  if(isNaN(v)) return String(n);
-  if(Math.abs(v)>=1e10) return v.toExponential(3);
-  // trim trailing zeros, max d decimals
-  var s=(+v.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d});
-  return s;
-}
-
-function upDisp(){
-  var el=document.getElementById('tdisp');
-  // Show pending op and prev value when waiting for second operand
-  if(pendingOp && justEvaled===false && cur==='0' && prevVal!==null){
-    // just pressed op, awaiting input
-    var sym={'+':'+','-':'−','*':'×','/':'÷'}[pendingOp]||pendingOp;
-    el.textContent=fN(prevVal)+' '+sym;
-    el.className='td muted';
-  } else {
-    el.textContent = cur==='0'&&cur.length===1 ? '0' : fN(cur);
-    el.className='td';
-  }
-}
-
-function renderTape(){
-  var scroll=document.getElementById('tscroll');
-  var empty=document.getElementById('tempty');
-  if(!entries.length){scroll.innerHTML='';scroll.appendChild(empty);empty.style.display='flex';return;}
-  empty.style.display='none';
-  var html='';
-  entries.forEach(function(e){
-    html+='<div class="t-entry"><span class="t-expr">'+e.expr+'</span><span class="t-eq">=</span><span class="t-val">'+fN(e.result)+'</span></div>';
-  });
-  html+='<div class="tape-sep"></div>';
-  html+='<div class="t-total"><span class="t-total-lbl">TOTAL</span><span class="t-total-val">'+fN(calcTotal())+'</span></div>';
-  scroll.innerHTML=html;
-  scroll.scrollTop=scroll.scrollHeight;
-}
-
-function calcTotal(){
-  if(!entries.length) return 0;
-  // Sum all results — tape total is a running sum of all committed results
-  var t=0;
-  entries.forEach(function(e){ t+=parseFloat(e.result)||0; });
-  return t;
-}
-
-function kNum(n){
-  if(justEvaled){
-    cur=n; justEvaled=false;
-  } else if(cur==='0'){
-    cur=n;
-  } else {
-    cur+=n;
-  }
-  hasInput=true;
-  upDisp();
-}
-
-function kFn(fn){
-  if(fn==='ac'){
-    cur='0'; prevVal=null; pendingOp=null; justEvaled=false; hasInput=false;
-  } else if(fn==='del'){
-    if(justEvaled||cur.length<=1){ cur='0'; justEvaled=false; hasInput=false; }
-    else { cur=cur.slice(0,-1)||'0'; }
-  } else if(fn==='dot'){
-    if(justEvaled){ cur='0.'; justEvaled=false; } 
-    else if(!cur.includes('.')) cur+='.';
-    hasInput=true;
-  } else if(fn==='pct'){
-    cur=String(parseFloat(cur)/100);
-    justEvaled=false; hasInput=true;
-  }
-  upDisp();
-}
-
-function kOp(op){
-  // Only chain-evaluate if we actually have a pending op AND the user typed a new number
-  if(pendingOp!==null && hasInput && !justEvaled){
-    kEq(true);
-  }
-  // Only set prevVal if user has actually entered something
-  if(hasInput || justEvaled){
-    prevVal=parseFloat(cur);
-  }
-  // If prevVal is still null here, we have nothing to operate on — ignore the op
-  if(prevVal===null) return;
-  pendingOp=op;
-  justEvaled=false;
-  hasInput=false;
-  cur='0';
-  upDisp();
-}
-
-function kEq(chain){
-  var sym={'+':'+','-':'−','*':'×','/':'÷'};
-
-  if(pendingOp===null){
-    // No operator — only commit if user actually typed something
-    if(!hasInput) return;
-    var v=parseFloat(cur)||0;
-    entries.push({expr:fN(cur), result:v});
-    cur='0'; prevVal=null; justEvaled=true; hasInput=false;
-    renderTape(); upDisp(); return;
-  }
-
-  // Need both a prevVal and actual input for second operand
-  if(prevVal===null) return;
-  var a=prevVal, b=parseFloat(cur), op=pendingOp;
-  var res;
-  if(op==='+') res=a+b;
-  else if(op==='-') res=a-b;
-  else if(op==='*') res=a*b;
-  else res=b===0?NaN:a/b;
-
-  if(isNaN(res)||!isFinite(res)) res=0;
-
-  var opsym=sym[op]||op;
-  var expr=fN(a)+' '+opsym+' '+fN(b);
-
-  if(!chain){
-    entries.push({expr:expr, result:res});
-    cur=String(res);
-    prevVal=null; pendingOp=null; justEvaled=true; hasInput=false;
-    renderTape();
-  } else {
-    cur=String(res);
-    prevVal=res;
-    pendingOp=null; hasInput=false;
-  }
-  upDisp();
-}
-
-function clrTape(){
-  entries=[]; cur='0'; prevVal=null; pendingOp=null; justEvaled=false; hasInput=false;
-  renderTape(); upDisp();
 }
 
 // ══════════════════════════════════════
@@ -722,7 +345,11 @@ var LM={ft:.3048,in:.0254,yd:.9144,m:1,cm:.01,mm:.001};
 var AM={sqft:.092903,sqyd:.836127,sqm:1,acre:4046.86,sqin:.00064516};
 var VM={cuft:.0283168,cuyd:.764555,cum:1,gal:.00378541,L:.001,cuin:1.63871e-5};
 var WM={lb:.453592,kg:1,ton:907.185,tonne:1000,oz:.0283495};
-var UL={ft:'Feet',in:'Inches',yd:'Yards',m:'Meters',cm:'Centimeters',mm:'Millimeters',sqft:'Sq Feet',sqyd:'Sq Yards',sqm:'Sq Meters',acre:'Acres',sqin:'Sq Inches',cuft:'Cu Feet',cuyd:'Cu Yards',cum:'Cu Meters',gal:'Gallons (US)',L:'Liters',cuin:'Cu Inches',lb:'Pounds',kg:'Kilograms',ton:'Short Tons',tonne:'Metric Tons',oz:'Ounces'};
+var UL={ft:'Feet',in:'Inches',yd:'Yards',m:'Meters',cm:'Centimeters',mm:'Millimeters',
+  sqft:'Sq Feet',sqyd:'Sq Yards',sqm:'Sq Meters',acre:'Acres',sqin:'Sq Inches',
+  cuft:'Cu Feet',cuyd:'Cu Yards',cum:'Cu Meters',gal:'Gallons (US)',L:'Liters',cuin:'Cu Inches',
+  lb:'Pounds',kg:'Kilograms',ton:'Short Tons',tonne:'Metric Tons',oz:'Ounces'};
+
 function cvt(v,m,f,t){return(v*m[f])/m[t];}
 function fm(n,d){
   d=d===undefined?4:d;
@@ -733,10 +360,12 @@ function fm(n,d){
 
 function cL(){
   var f=document.getElementById('lfu').value,t=document.getElementById('ltu').value;
-  document.getElementById('lfl').textContent=UL[f];document.getElementById('ltl').textContent=UL[t];
+  document.getElementById('lfl').textContent=UL[f];
+  document.getElementById('ltl').textContent=UL[t];
   var v=parseFloat(document.getElementById('lf').value);
   if(isNaN(v)){document.getElementById('lt').value='';hFrac();return;}
-  var r=cvt(v,LM,f,t);document.getElementById('lt').value=fm(r);
+  var r=cvt(v,LM,f,t);
+  document.getElementById('lt').value=fm(r);
   if(t==='in')sFrac(r);else hFrac();
 }
 function cLR(){
@@ -749,7 +378,12 @@ function cLR(){
 function sFrac(inches){
   var w=Math.floor(Math.abs(inches)),fr=Math.abs(inches)-w,sx=Math.round(fr*16),s;
   if(sx===0||sx===16){s=(sx===16?w+1:w)+'"';}
-  else{var n=sx,d=16,g=function(a,b){return b?g(b,a%b):a;},gc=g(n,d);n/=gc;d/=gc;s=(w>0?w+' ':'')+n+'/'+d+'"';}
+  else{
+    var n=sx,d=16;
+    function g(a,b){return b?g(b,a%b):a;}
+    var gc=g(n,d);n/=gc;d/=gc;
+    s=(w>0?w+' ':'')+n+'/'+d+'"';
+  }
   document.getElementById('lfracv').textContent=s;
   document.getElementById('lfrac').classList.add('show');
 }
@@ -757,7 +391,8 @@ function hFrac(){document.getElementById('lfrac').classList.remove('show');}
 
 function cA(){
   var f=document.getElementById('afu').value,t=document.getElementById('atu').value;
-  document.getElementById('afl').textContent=UL[f];document.getElementById('atl').textContent=UL[t];
+  document.getElementById('afl').textContent=UL[f];
+  document.getElementById('atl').textContent=UL[t];
   var v=parseFloat(document.getElementById('af').value);
   if(isNaN(v)){document.getElementById('at').value='';return;}
   document.getElementById('at').value=fm(cvt(v,AM,f,t));
@@ -770,7 +405,8 @@ function cAR(){
 }
 function cV(){
   var f=document.getElementById('vfu').value,t=document.getElementById('vtu').value;
-  document.getElementById('vfl').textContent=UL[f];document.getElementById('vtl').textContent=UL[t];
+  document.getElementById('vfl').textContent=UL[f];
+  document.getElementById('vtl').textContent=UL[t];
   var v=parseFloat(document.getElementById('vf').value);
   if(isNaN(v)){document.getElementById('vt').value='';return;}
   document.getElementById('vt').value=fm(cvt(v,VM,f,t));
@@ -783,7 +419,8 @@ function cVR(){
 }
 function cW(){
   var f=document.getElementById('wfu').value,t=document.getElementById('wtu').value;
-  document.getElementById('wfl').textContent=UL[f];document.getElementById('wtl').textContent=UL[t];
+  document.getElementById('wfl').textContent=UL[f];
+  document.getElementById('wtl').textContent=UL[t];
   var v=parseFloat(document.getElementById('wf').value);
   if(isNaN(v)){document.getElementById('wt').value='';return;}
   document.getElementById('wt').value=fm(cvt(v,WM,f,t));
@@ -794,32 +431,40 @@ function cWR(){
   if(isNaN(v)){document.getElementById('wf').value='';return;}
   document.getElementById('wf').value=fm(cvt(v,WM,t,f));
 }
-function tF(){var f=parseFloat(document.getElementById('tf').value);if(isNaN(f)){document.getElementById('tc').value='';return;}document.getElementById('tc').value=fm((f-32)*5/9,2);}
-function tC(){var c=parseFloat(document.getElementById('tc').value);if(isNaN(c)){document.getElementById('tf').value='';return;}document.getElementById('tf').value=fm(c*9/5+32,2);}
+function tF(){
+  var f=parseFloat(document.getElementById('tf').value);
+  if(isNaN(f)){document.getElementById('tc').value='';return;}
+  document.getElementById('tc').value=fm((f-32)*5/9,2);
+}
+function tC(){
+  var c=parseFloat(document.getElementById('tc').value);
+  if(isNaN(c)){document.getElementById('tf').value='';return;}
+  document.getElementById('tf').value=fm(c*9/5+32,2);
+}
 function swp(type){
   var ids={l:['lfu','ltu','lf','lt'],a:['afu','atu','af','at'],v:['vfu','vtu','vf','vt'],w:['wfu','wtu','wf','wt']};
-  var arr=ids[type],fs=document.getElementById(arr[0]),ts=document.getElementById(arr[1]);
+  var arr=ids[type];
+  var fs=document.getElementById(arr[0]),ts=document.getElementById(arr[1]);
   var tmp=fs.value;fs.value=ts.value;ts.value=tmp;
-  var fv=document.getElementById(arr[2]),tv=document.getElementById(arr[3]),tmpv=fv.value;fv.value=tv.value;tv.value=tmpv;
+  var fv=document.getElementById(arr[2]),tv=document.getElementById(arr[3]);
+  var tmpv=fv.value;fv.value=tv.value;tv.value=tmpv;
   if(type==='l')cL();else if(type==='a')cA();else if(type==='v')cV();else cW();
 }
 
 // ══════════════════════════════════════
-// CONSTRUCTION HELPERS
+// CONSTRUCTION CALCS
 // ══════════════════════════════════════
-// Read a ft+in pair and return total inches
-function getFtIn(ftId, inId){
+function getFtIn(ftId,inId){
   var ft=parseFloat(document.getElementById(ftId).value)||0;
   var inc=parseFloat(document.getElementById(inId).value)||0;
-  return ft*12 + inc; // total inches
+  return ft*12+inc;
 }
-// Total inches → feet decimal
-function inchesToFt(i){ return i/12; }
+function inToFt(i){return i/12;}
 
 function sR(id,val,sub){
   document.getElementById('r-'+id).classList.add('show');
   document.getElementById('rv-'+id).textContent=val;
-  if(sub!==undefined) document.getElementById('rs-'+id).textContent=sub;
+  if(sub!==undefined)document.getElementById('rs-'+id).textContent=sub;
   document.getElementById('e-'+id).classList.remove('show');
 }
 function sE(id){
@@ -827,32 +472,33 @@ function sE(id){
   document.getElementById('e-'+id).classList.add('show');
 }
 
-// Format decimal feet → ft-in string, e.g. 10.5 → "10'-6\""
 function fmFtIn(totalFt){
-  var ft=Math.floor(Math.abs(totalFt));
-  var inc=Math.round((Math.abs(totalFt)-ft)*12*16)/16; // round to 1/16"
+  var neg=totalFt<0;
+  totalFt=Math.abs(totalFt);
+  var ft=Math.floor(totalFt);
+  var inc=Math.round((totalFt-ft)*12*16)/16;
   var inWhole=Math.floor(inc);
-  var frac=inc-inWhole;
+  var frac=Math.round((inc-inWhole)*16);
   var fracStr='';
   if(frac>0){
-    var n=Math.round(frac*16),d=16,g=function(a,b){return b?g(b,a%b):a;},gc=g(n,d);n/=gc;d/=gc;
+    var n=frac,d=16;
+    function g(a,b){return b?g(b,a%b):a;}
+    var gc=g(n,d);n/=gc;d/=gc;
     fracStr=' '+n+'/'+d;
   }
-  return ft+"'-"+inWhole+(fracStr?fracStr:'')+(frac||inWhole?'"':'"');
+  return (neg?'-':'')+(ft>0?ft+"'-":'')+(inWhole||frac?inWhole+fracStr+'"':'0"');
 }
 
 function cPitch(){
   var riseIn=getFtIn('pr-ft','pr-in');
   var runIn=getFtIn('pn-ft','pn-in');
-  if(runIn<=0||riseIn<0){sE('pitch');return;}
-  // Normalize to rise per 12" of run (standard pitch notation)
-  var pitchPer12=riseIn/runIn*12;
+  if(runIn<=0){sE('pitch');return;}
+  var per12=riseIn/runIn*12;
   var ang=Math.atan(riseIn/runIn)*180/Math.PI;
-  // Rafter length per foot of run
-  var rafterPer12=Math.sqrt(144+pitchPer12*pitchPer12); // inches of rafter per 12" run
+  var rafterFactor=Math.sqrt(144+per12*per12)/12;
   sR('pitch',
-    fm(pitchPer12,2)+':12 pitch',
-    'Angle: '+ang.toFixed(1)+'°  ·  Rafter factor: '+fm(rafterPer12/12,4)+' ft/ft run'
+    fm(per12,2)+':12 pitch',
+    'Angle: '+ang.toFixed(1)+'°  ·  Rafter factor: '+fm(rafterFactor,4)+' ft per ft of run'
   );
 }
 
@@ -866,19 +512,19 @@ function toggleShape(){
 function cAreaCalc(){
   var s=document.getElementById('ashp').value,sqft;
   if(s==='rect'){
-    var lft=inchesToFt(getFtIn('al-ft','al-in'));
-    var wft=inchesToFt(getFtIn('aw-ft','aw-in'));
-    if(lft<=0||wft<=0){sE('area');return;}
-    sqft=lft*wft;
+    var l=inToFt(getFtIn('al-ft','al-in'));
+    var w=inToFt(getFtIn('aw-ft','aw-in'));
+    if(l<=0||w<=0){sE('area');return;}
+    sqft=l*w;
   } else if(s==='circ'){
-    var rft=inchesToFt(getFtIn('ar-ft','ar-in'));
-    if(rft<=0){sE('area');return;}
-    sqft=Math.PI*rft*rft;
+    var r=inToFt(getFtIn('ar-ft','ar-in'));
+    if(r<=0){sE('area');return;}
+    sqft=Math.PI*r*r;
   } else {
-    var bft=inchesToFt(getFtIn('ab-ft','ab-in'));
-    var hft=inchesToFt(getFtIn('ah-ft','ah-in'));
-    if(bft<=0||hft<=0){sE('area');return;}
-    sqft=0.5*bft*hft;
+    var b=inToFt(getFtIn('ab-ft','ab-in'));
+    var h=inToFt(getFtIn('ah-ft','ah-in'));
+    if(b<=0||h<=0){sE('area');return;}
+    sqft=0.5*b*h;
   }
   sR('area',
     fm(sqft,2)+' sq ft',
@@ -887,17 +533,14 @@ function cAreaCalc(){
 }
 
 function cConcrete(){
-  var lft=inchesToFt(getFtIn('cnl-ft','cnl-in'));
-  var wft=inchesToFt(getFtIn('cnw-ft','cnw-in'));
+  var l=inToFt(getFtIn('cnl-ft','cnl-in'));
+  var w=inToFt(getFtIn('cnw-ft','cnw-in'));
   var tIn=parseFloat(document.getElementById('cnt').value);
-  if(lft<=0||wft<=0||isNaN(tIn)||tIn<=0){sE('con');return;}
-  var tFt=tIn/12;
-  var cuft=lft*wft*tFt, cuyd=cuft/27;
-  // Waste factor note: contractors typically add 5-10% for waste
-  var cuydW=cuyd*1.08;
+  if(l<=0||w<=0||isNaN(tIn)||tIn<=0){sE('con');return;}
+  var cuft=l*w*(tIn/12),cuyd=cuft/27;
   sR('con',
     fm(cuyd,2)+' cu yd  ('+fm(cuft,1)+' cu ft)',
-    'With 8% waste: '+fm(cuydW,2)+' yd³  ·  ~'+Math.ceil(cuft/0.45)+' bags @ 60 lb'
+    'With 8% waste: '+fm(cuyd*1.08,2)+' yd³  ·  ~'+Math.ceil(cuft/0.45)+' bags @ 60 lb'
   );
 }
 
@@ -905,16 +548,13 @@ function cStair(){
   var riseIn=getFtIn('str-ft','str-in');
   var treadIn=parseFloat(document.getElementById('stt').value)||11;
   if(riseIn<=0){sE('stair');return;}
-  // IBC: max riser 7-3/4", min 4". Aim for 7" typical
   var n=Math.ceil(riseIn/7.5);
-  var rh=riseIn/n; // actual riser height in inches
+  var rh=riseIn/n;
   var totalRunIn=(n-1)*treadIn;
-  // IBC check
-  var ibcOk=rh<=7.75&&rh>=4;
-  var note=ibcOk?'IBC compliant riser height':'⚠ Riser '+fm(rh,2)+'" — check IBC 7¾" max';
+  var ibc=rh<=7.75&&rh>=4;
   sR('stair',
     n+' risers  @  '+fm(rh,3)+'" each',
-    'Total run: '+fmFtIn(totalRunIn/12)+'  ·  Tread: '+treadIn+'"  ·  '+note
+    'Total run: '+fmFtIn(totalRunIn/12)+'  ·  Tread: '+treadIn+'"  ·  '+(ibc?'IBC compliant':'⚠ Check IBC 7¾" max')
   );
 }
 
@@ -923,10 +563,9 @@ function cDiag(){
   var bIn=getFtIn('dgb-ft','dgb-in');
   if(aIn<=0||bIn<=0){sE('diag');return;}
   var dIn=Math.sqrt(aIn*aIn+bIn*bIn);
-  var ang=Math.atan(bIn/aIn)*180/Math.PI;
   sR('diag',
     fmFtIn(dIn/12),
-    fm(dIn,3)+'"  ·  Angle: '+fm(ang,2)+'°'
+    fm(dIn,3)+'"  ·  Angle: '+fm(Math.atan(bIn/aIn)*180/Math.PI,2)+'°'
   );
 }
 
@@ -936,11 +575,9 @@ function cBoardFt(){
   var l=parseFloat(document.getElementById('bf-l').value);
   var q=parseFloat(document.getElementById('bf-q').value)||1;
   if(isNaN(t)||isNaN(w)||isNaN(l)||t<=0||w<=0||l<=0){sE('bf');return;}
-  // Board feet = (T" × W" × L') / 12
   var bf=(t*w*l)/12;
-  var total=bf*q;
   sR('bf',
-    fm(total,2)+' board feet',
+    fm(bf*q,2)+' board feet',
     fm(bf,3)+' BF each  ·  '+q+' piece'+(q!==1?'s':'')
   );
 }
