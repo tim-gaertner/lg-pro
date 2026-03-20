@@ -575,7 +575,7 @@ function switchTab(n,el){
 // the current expression to the tape.
 // Pressing an operator after = chains.
 // ══════════════════════════════════════
-var cur='0', prevVal=null, pendingOp=null, justEvaled=false, entries=[];
+var cur='0', prevVal=null, pendingOp=null, justEvaled=false, hasInput=false, entries=[];
 
 function fN(n,d){
   d = d===undefined ? 6 : d;
@@ -626,40 +626,47 @@ function calcTotal(){
 
 function kNum(n){
   if(justEvaled){
-    // After = was pressed, start fresh number (Numerical behavior)
     cur=n; justEvaled=false;
   } else if(cur==='0'){
     cur=n;
   } else {
     cur+=n;
   }
+  hasInput=true;
   upDisp();
 }
 
 function kFn(fn){
   if(fn==='ac'){
-    cur='0'; prevVal=null; pendingOp=null; justEvaled=false;
+    cur='0'; prevVal=null; pendingOp=null; justEvaled=false; hasInput=false;
   } else if(fn==='del'){
-    if(justEvaled||cur.length<=1){ cur='0'; justEvaled=false; }
+    if(justEvaled||cur.length<=1){ cur='0'; justEvaled=false; hasInput=false; }
     else { cur=cur.slice(0,-1)||'0'; }
   } else if(fn==='dot'){
-    if(justEvaled){ cur='0.'; justEvaled=false; }
+    if(justEvaled){ cur='0.'; justEvaled=false; } 
     else if(!cur.includes('.')) cur+='.';
+    hasInput=true;
   } else if(fn==='pct'){
     cur=String(parseFloat(cur)/100);
-    justEvaled=false;
+    justEvaled=false; hasInput=true;
   }
   upDisp();
 }
 
 function kOp(op){
-  // If there's already a pending op and we have a new number, evaluate first
-  if(pendingOp!==null && !justEvaled){
-    kEq(true); // chain: evaluate but don't commit as standalone
+  // Only chain-evaluate if we actually have a pending op AND the user typed a new number
+  if(pendingOp!==null && hasInput && !justEvaled){
+    kEq(true);
   }
-  prevVal=parseFloat(cur);
+  // Only set prevVal if user has actually entered something
+  if(hasInput || justEvaled){
+    prevVal=parseFloat(cur);
+  }
+  // If prevVal is still null here, we have nothing to operate on — ignore the op
+  if(prevVal===null) return;
   pendingOp=op;
   justEvaled=false;
+  hasInput=false;
   cur='0';
   upDisp();
 }
@@ -668,13 +675,16 @@ function kEq(chain){
   var sym={'+':'+','-':'−','*':'×','/':'÷'};
 
   if(pendingOp===null){
-    // No operator — just commit current number to tape
+    // No operator — only commit if user actually typed something
+    if(!hasInput) return;
     var v=parseFloat(cur)||0;
     entries.push({expr:fN(cur), result:v});
-    cur='0'; prevVal=null; justEvaled=true;
+    cur='0'; prevVal=null; justEvaled=true; hasInput=false;
     renderTape(); upDisp(); return;
   }
 
+  // Need both a prevVal and actual input for second operand
+  if(prevVal===null) return;
   var a=prevVal, b=parseFloat(cur), op=pendingOp;
   var res;
   if(op==='+') res=a+b;
@@ -690,19 +700,18 @@ function kEq(chain){
   if(!chain){
     entries.push({expr:expr, result:res});
     cur=String(res);
-    prevVal=null; pendingOp=null; justEvaled=true;
+    prevVal=null; pendingOp=null; justEvaled=true; hasInput=false;
     renderTape();
   } else {
-    // chained op: update current without committing
     cur=String(res);
     prevVal=res;
-    pendingOp=null;
+    pendingOp=null; hasInput=false;
   }
   upDisp();
 }
 
 function clrTape(){
-  entries=[]; cur='0'; prevVal=null; pendingOp=null; justEvaled=false;
+  entries=[]; cur='0'; prevVal=null; pendingOp=null; justEvaled=false; hasInput=false;
   renderTape(); upDisp();
 }
 
